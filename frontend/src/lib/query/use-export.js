@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { exportData as exportDataApi } from "@/lib/api/strapi";
+import { exportData as exportDataApi } from "@/lib/api/client";
 
 
 export const useExport = () => {

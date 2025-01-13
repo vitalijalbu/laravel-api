@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { getList } from "@/lib/api/strapi";
+import { getList } from "@/lib/api/client";
 
 export const useInfiniteList = ({
   resource,

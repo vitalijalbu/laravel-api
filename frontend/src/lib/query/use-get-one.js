@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getOne } from "@/lib/api/strapi";
+import { getOne } from "@/lib/api/client";
 
 export const useGetOne = ({ resource, id, meta }) => {
   if (!id) return null;

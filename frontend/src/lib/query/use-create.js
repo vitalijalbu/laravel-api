@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { create } from "../api/strapi";
+import { create } from "../api/client";
 
 
 

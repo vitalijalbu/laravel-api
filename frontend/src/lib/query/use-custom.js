@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { custom } from "@/lib/api/strapi";
+import { custom } from "@/lib/api/client";
 
 export const useCustom = ({
   url,

@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteOne } from "../api/strapi";
+import { deleteOne } from "../api/client";
 
 import confirm from "@/shared/components/confirm";
 

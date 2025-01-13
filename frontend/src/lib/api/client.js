@@ -54,7 +54,7 @@ export const getMany = async ({ resource, ids, meta }) => {
     fields,
     populate,
     publicationState,
-    "pagination[pageSize]": ids.length,
+    "pagination[page_size]": ids.length,
   };
 
   const { data } = await apiClient.get(

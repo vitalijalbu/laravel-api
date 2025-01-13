@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getSingular } from "@/lib/api/strapi";
+import { getSingular } from "@/lib/api/client";
 
 export const useGetSingular = ({ resource, populate, filters }) => {
   return useQuery({
