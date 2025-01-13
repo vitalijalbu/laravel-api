@@ -1,0 +1,108 @@
+@layer tailwind-base, antd;
+
+@tailwind components;
+@tailwind utilities;
+
+@import './components/modal';
+
+html,
+body {
+  letter-spacing: 0.02rem;
+  background-color: #EAF4F2;
+}
+
+mark,
+.ant-typography mark {
+  background: #E8F3F1 !important;
+  border-radius: 4px !important;
+  padding: 2px 4px !important;
+}
+
+:root {
+  --swiper-theme-color: #fff !important;
+}
+
+/* Change the white to any color */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #F9FAFB inset !important;
+}
+
+.ant-menu-item-active svg {
+  stroke: #1677ff;
+}
+
+.ant-card-head-title {
+  font-size: 1rem;
+}
+
+.ant-picker-calendar-header {
+  justify-content: space-between !important;
+}
+
+.ant-picker-calendar-header .ant-select,
+.ant-picker-calendar-header .ant-radio-group {
+  min-width: 33% !important;
+}
+
+.ant-picker,
+.ant-select,
+.ant-input,
+.ant-input-number-group-wrapper,
+.ant-input-number.ant-input-number-in-form-item {
+  width: 100%;
+}
+
+.ant-tabs-tab-btn {
+  display: flex;
+}
+
+.ant-drawer-content-wrapper.bordered {
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  box-shadow: none !important;
+
+  .ant-drawer-content {
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+  }
+}
+
+textarea,
+.ant-input-textarea-affix-wrapper {
+  resize: none !important;
+  border-radius: 12px !important;
+}
+
+.ant-list-item a {
+  width: auto;
+  flex: 1;
+}
+
+li.ant-list-item:hover {
+  background: #fafafa;
+  cursor: pointer;
+}
+
+.ant-list-item-meta-content {
+  align-self: center;
+}
+
+.ant-card-head-title {
+  font-size: 1.5rem;
+}
+
+.ant-btn.ant-btn-black {
+  background-color: #333;
+}
+button svg{
+  display: flex !important;
+}
+
+@media only screen and (max-width: 768px) {
+  .ant-drawer-content-wrapper {
+    width: 100% !important;
+  }
+}

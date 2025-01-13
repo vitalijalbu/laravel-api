@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"],
+      "@/lib/*": ["./src/lib/*"],
+      "@/assets*": ["./src/assets*"],
+      "@/icons*": ["./src/assets/icons*"],
+      "@/hooks*": ["./src/hooks*"],
+      "@/modules*": ["./src/modules*"],
+      "@/components*": ["./src/shared/components*"],
+      "@/layouts*": ["./src/layouts*"]
+    }
+  }
+}

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RoleController;
 
 Route::prefix('auth')->group(function () {
     // Public routes
@@ -18,14 +19,25 @@ Route::prefix('auth')->group(function () {
     });
 });
 
+// Product routes
+Route::prefix('products')->name('products.')->group(function () {
+    Route::get('/', [ProductController::class, 'index'])->name('index');
+    Route::post('/', [ProductController::class, 'store'])->name('store');
+    Route::get('/{id}', [ProductController::class, 'show'])->name('show');
+    Route::put('/{id}', [ProductController::class, 'update'])->name('update');
+    Route::delete('/{id}', [ProductController::class, 'destroy'])->name('destroy');
+});
+
+// Settings Roles
+Route::prefix('roles')->name('settings')->group(function () {
+    Route::get('/', [RoleController::class, 'index'])->name('roles.index');
+    Route::get('/create', [RoleController::class, 'create'])->name('roles.create');
+    Route::post('/create', [RoleController::class, 'store'])->name('roles.store');
+    Route::get('/{id}', [RoleController::class, 'view'])->name('roles.view');
+});
+
+
 Route::middleware(['auth:sanctum'])->group(function () {
-    // Product routes
-    Route::prefix('products')->name('products.')->group(function () {
-        Route::get('/', [ProductController::class, 'index'])->name('index');
-        Route::post('/', [ProductController::class, 'store'])->name('store');
-        Route::put('/{id}', [ProductController::class, 'update'])->name('update');
-        Route::delete('/{id}', [ProductController::class, 'destroy'])->name('destroy');
-    });
 
     // User routes
     Route::prefix('users')->name('users.')->group(function () {

@@ -1,0 +1,86 @@
+@keyframes antSlideUp {
+  0% {
+    transform: translateY(100%);
+    transform-origin: 0% 0%;
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    transform-origin: 0% 0%;
+    opacity: 1;
+  }
+}
+
+@keyframes antSlideOut {
+  0% {
+    transform: translateY(0);
+    transform-origin: 0% 0%;
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(100%);
+    transform-origin: 0% 0%;
+    opacity: 0;
+  }
+}
+
+.ant-modal-slide-up-enter,
+.ant-modal-slide-up-appear {
+  transform: scale(0);
+  transform-origin: 0% 0%;
+  opacity: 0;
+  animation-play-state: paused;
+  animation-duration: 0.1s;
+  animation-fill-mode: both;
+  /* animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06); */
+}
+
+.ant-modal-slide-up-leave {
+  animation-play-state: paused;
+  animation-duration: 0.1s;
+  animation-fill-mode: both;
+  /* animation-timing-function: cubic-bezier(0.86, 0, 0.07, 1); */
+}
+
+.ant-modal-slide-up-enter.ant-modal-slide-up-enter-active,
+.ant-modal-slide-up-appear.ant-modal-slide-up-appear-active {
+  animation-name: antSlideUp;
+  animation-play-state: running;
+}
+
+.ant-modal-slide-up-leave.ant-modal-slide-up-leave-active {
+  animation-name: antSlideOut;
+  animation-play-state: running;
+  pointer-events: none;
+}
+
+.ant-modal .ant-modal-close,
+.ant-drawer-close {
+  border-radius: 50% !important;
+  width: 36px !important;
+  height: 36px !important;
+}
+
+.ant-modal:not(.confirm-modal) .ant-modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.ant-modal:not(.confirm-modal) .ant-modal-body {
+  flex: 1;
+  overflow: scroll;
+}
+
+@media (max-width: 767px) {
+  .ant-modal:not(.confirm-modal) {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .ant-modal:not(.confirm-modal) .ant-modal-content {
+    height: calc(100dvh - 16px) !important;
+  }
+}
