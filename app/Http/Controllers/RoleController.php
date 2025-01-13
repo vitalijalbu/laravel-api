@@ -42,4 +42,17 @@ class RoleController extends Controller
         return response()->json($store, 201);
     }
 
+    public function show($id)
+    {
+        $data = Role::find($id)->firstOrFail();
+
+        if (!$data) {
+            return response()->json([
+                'message' => 'Product not found'
+            ], 404);
+        }
+
+        return response()->json($data, 200);
+    }
+
 }

@@ -32,7 +32,7 @@ export default function Admin() {
 
   return (
     <AppLayout
-      title={isClient ? `Ciao, ${user?.username}` : null}
+      title={isClient ? `Hi, ${user?.username}` : null}
       isError={isError}
     >
       <Row gutter={[8, 8]}>

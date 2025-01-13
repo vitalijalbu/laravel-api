@@ -33,7 +33,7 @@ Route::prefix('roles')->name('settings')->group(function () {
     Route::get('/', [RoleController::class, 'index'])->name('roles.index');
     Route::get('/create', [RoleController::class, 'create'])->name('roles.create');
     Route::post('/create', [RoleController::class, 'store'])->name('roles.store');
-    Route::get('/{id}', [RoleController::class, 'view'])->name('roles.view');
+    Route::get('/{id}', [RoleController::class, 'show'])->name('roles.show');
 });
 
 

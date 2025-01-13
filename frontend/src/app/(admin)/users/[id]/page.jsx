@@ -23,23 +23,15 @@ import { useDeleteOne, useGetOne, useList } from "@/lib/query";
 import {
   DrawerUser,
 } from "@/modules/admin";
-import dayjs from "dayjs";
-import { useExport } from "@/lib/query/use-export";
 
-const { RangePicker } = DatePicker;
+
 
 export default function Page() {
   const RESOURCE = "users";
-  const [RESOURCE_TAB, setTabResource] = useState("reminders");
   const [modal, setModal] = useState(false);
-  const [dates, setDateRange] = useState([
-    dayjs().startOf("week"),
-    dayjs().endOf("day"),
-  ]);
   const { id } = useParams();
   const { mutate, isPending: isDeletePending } = useDeleteOne();
   const { data, isPending, isError } = useGetOne({ resource: RESOURCE, id });
-  const { mutate: exportData, isPending: isPendingExport } = useExport();
 
   const handleExport = () => {
     const formattedDates = dates.map(date => date.format("YYYY-MM-DD"));
@@ -49,33 +41,7 @@ export default function Page() {
     });
   };
 
-  const {
-    data: itemsData,
-    isPending: isPendingData,
-    isError: isErrorData,
-  } = useList({
-    resource: RESOURCE_TAB,
-    filters: [
-      {
-        field: "user",
-        operator: "eq",
-        value: id ?? null,
-      },
-      {
-        field: "createdAt",
-        operator: "gte",
-        value: dates[0].startOf("day").format("YYYY-MM-DDTHH:mm:ssZ[Z]"),
-      },
-      {
-        field: "createdAt",
-        operator: "lte",
-        value: dates[1].endOf("day").format("YYYY-MM-DDTHH:mm:ssZ[Z]"),
-      },
-    ],
-    meta: {
-      populate: "*",
-    },
-  });
+
 
   const tableActions = [
     {
@@ -103,9 +69,6 @@ export default function Page() {
     },
   ];
 
-  const onDateRangeChange = (selectedDates) => {
-    setDateRange(selectedDates);
-  };
 
 
 

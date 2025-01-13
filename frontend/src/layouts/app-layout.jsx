@@ -1,3 +1,4 @@
+'use client';
 import React, { useState } from "react";
 import { Layout } from "antd";
 const { Sider, Content } = Layout;

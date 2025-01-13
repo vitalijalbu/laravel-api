@@ -35,14 +35,14 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $product = Product::find($id)->firstOrFail();
+        $data = Product::find($id)->firstOrFail();
 
-        if (!$product) {
+        if (!$data) {
             return response()->json([
                 'message' => 'Product not found'
             ], 404);
         }
 
-        return response()->json(new ProductResource($product), 200);
+        return response()->json(new ProductResource($data), 200);
     }
 }

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     Checkbox,
     Col,
@@ -13,9 +13,10 @@ import {
     Divider,
     Typography,
     Space,
+    Button,
 } from "antd";
 const { Title } = Typography;
-import { useForm } from "@inertiajs/react";
+
 import {
     IconPencilMinus,
     IconTable,
@@ -26,16 +27,17 @@ import { getIcon } from "@/utils/icons";
 
 const FormRole = (props) => {
     const { initialData } = props;
-    const [form] = Form.useForm();
-    // Initialize the form with Inertia's useForm hook
-    const { data, setData, post, processing } = useForm({
-        permissions: initialData,
+    const [formData, setFormData] = useState({
+        name: "",
+        color: "",
+        permissions: initialData?.permissions || [],
     });
 
     // Handle checkbox changes
     const handlePermissionChange = (recordKey, permissionType, checked) => {
-        setData("permissions", (permissions) =>
-            permissions.map((item) =>
+        setFormData((prevData) => ({
+            ...prevData,
+            permissions: prevData.permissions.map((item) =>
                 item.key === recordKey
                     ? {
                           ...item,
@@ -45,14 +47,14 @@ const FormRole = (props) => {
                           },
                       }
                     : item
-            )
-        );
+            ),
+        }));
     };
 
     // Define table columns
     const columns = [
         {
-            title: "Pagina",
+            title: "Page",
             key: "pageName",
             render: (record) => (
                 <Space>
@@ -65,7 +67,7 @@ const FormRole = (props) => {
             title: (
                 <Space>
                     <IconTablePlus color="#28a745" size={20} />
-                    Creazione
+                    Create
                 </Space>
             ),
             dataIndex: "permissions",
@@ -88,7 +90,7 @@ const FormRole = (props) => {
             title: (
                 <Space>
                     <IconTable color="#007bff" size={20} />
-                    Lettura
+                    Read
                 </Space>
             ),
             dataIndex: "permissions",
@@ -134,7 +136,7 @@ const FormRole = (props) => {
             title: (
                 <Space>
                     <IconTrash color="#dc3545" size={20} />
-                    Eliminazione
+                    Delete
                 </Space>
             ),
             dataIndex: "permissions",
@@ -155,61 +157,50 @@ const FormRole = (props) => {
         },
     ];
 
-    // Gestione del submit
-    const handleSubmit = () => {
-        console.log("form:", data);
-        post("store", {
-            onSuccess: () => {
-                message.success("Accesso effettuato con successo!");
-            },
-            onError: () => {
-                message.error(
-                    "Errore nei dati di accesso, controlla e riprova."
-                );
-            },
-        });
-    };
-
     return (
         <Card>
             <Form
                 layout="vertical"
-                name="form-reminder"
-                form={form}
-                onFinish={handleSubmit}
-                disabled={processing}
+                name="form-roles"
             >
                 <Row gutter={16}>
                     <Col span={12}>
                         <Form.Item
-                            label="Nome ruolo"
+                            label="Name"
                             name="name"
+                            initialValue={formData.name}
                             rules={[
                                 {
-                                    required: true,
-                                    message: "Inserisci il nome del ruolo",
+                                    required: true
                                 },
                             ]}
                         >
-                            <Input />
+                            <Input
+                                value={formData.name}
+
+                            />
                         </Form.Item>
                     </Col>
                     <Col span={12}>
                         <Form.Item
-                            label="Colore"
+                            label="Color"
                             name="color"
+                            initialValue={formData.color}
                         >
-                            <ColorPicker showText />
+                            <ColorPicker
+                                value={formData.color}
+                                showText
+                            />
                         </Form.Item>
                     </Col>
                 </Row>
             </Form>
-            <Divider>Seleziona permessi</Divider>
+            <Divider>Select permissions</Divider>
             <Table
-                dataSource={initialData}
+                dataSource={initialData?.permissions || []}
                 columns={columns}
                 pagination={false}
-                key="uuid"
+                rowKey="uuid"
             />
         </Card>
     );

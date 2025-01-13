@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\ResponseHelper;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Database\Factories\UserFactory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -31,5 +32,18 @@ class UserController extends Controller
         );
 
         return response()->json($response, 200);
+    }
+
+    public function show($id)
+    {
+        $data = User::find($id)->firstOrFail();
+
+        if (!$data) {
+            return response()->json([
+                'message' => 'Product not found'
+            ], 404);
+        }
+
+        return response()->json(new UserResource($data), 200);
     }
 }
