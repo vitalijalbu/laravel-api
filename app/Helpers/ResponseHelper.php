@@ -5,21 +5,27 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class ResponseHelper
 {
-    public static function formatResponse(LengthAwarePaginator $paginatedData, $filter = null)
+   /**
+     * Format the response structure.
+     *
+     * @param array $data
+     * @param array $pagination
+     * @param array $filters
+     * @return array
+     */
+    public static function formatResponse(array $data, array $pagination, array $filters = []): array
     {
         return [
-            'data' => $paginatedData->items(),
-            'filter' => isset($filter['filter']) ?? null,
+            'data' => $data,
+            'filter' => $filters['filter'] ?? null,
             'meta' => [
-                'current_page' => $paginatedData->currentPage(),
-                'next_page_url' => $paginatedData->nextPageUrl(),
-                'prev_page_url' => $paginatedData->previousPageUrl(),
-                'from' => $paginatedData->firstItem(),
-                'last_page' => $paginatedData->lastPage(),
-                'path' => $paginatedData->path(),
-                'per_page' => $paginatedData->perPage(),
-                'to' => $paginatedData->lastItem(),
-                'total' => $paginatedData->total(),
+                'pagination' => [
+                    'total' => $pagination['total'] ?? 0,
+                    'count' => $pagination['count'] ?? 0,
+                    'page_size' => $pagination['per_page'] ?? 25,
+                    'current_page' => $pagination['current_page'] ?? 1,
+                    'total_pages' => $pagination['total_pages'] ?? 1,
+                ],
             ],
         ];
     }

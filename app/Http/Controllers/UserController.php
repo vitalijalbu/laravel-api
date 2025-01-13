@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ResponseHelper;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -20,6 +22,14 @@ class UserController extends Controller
             ->paginate($filters['page_size'] ?? 25)
             ->appends(request()->query());
 
-        return response()->json($data);
+        $pagination = $data->toArray();
+
+        $response = ResponseHelper::formatResponse(
+            UserResource::collection($data)->toArray($request),
+            $pagination,
+            $filters
+        );
+
+        return response()->json($response, 200);
     }
 }
