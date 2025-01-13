@@ -11,6 +11,14 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+
+    // Fetch the CSRF cookie
+    public function csrfCookie()
+    {
+        return response()->json(['message' => 'CSRF cookie set'])->cookie('XSRF-TOKEN', csrf_token());
+    }
+
+
     public function register(RegisterRequest $request)
     {
         $fields = $request->validated();
@@ -50,5 +58,10 @@ class AuthController extends Controller
         $request->session()->regenerateToken();
 
         return response()->json(['message' => 'Logged out successfully'], 200);
+    }
+
+    public function me(Request $request)
+    {
+        return response()->json($request->user(), 200);
     }
 }
