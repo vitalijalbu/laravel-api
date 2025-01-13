@@ -1,0 +1,712 @@
+{
+	"info": {
+		"_postman_id": "04b22333-c9f0-4be9-b37d-f6b9441f0a47",
+		"name": "laravel-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5580700"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "csrf-cookie",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const jar = pm.cookies.jar();",
+									"",
+									"jar.get(\"https://laravel-api.test\", \"XSRF-TOKEN\", (err, cookie) => {",
+									"\tpm.request.addHeader({",
+									"\t\tkey: \"X-XSRF-TOKEN\",",
+									"\t\tvalue: cookie",
+									"\t});",
+									"",
+									"\tpm.request.addHeader({",
+									"\t\tkey: \"Referer\",",
+									"\t\tvalue: \"https://laravel-api.test\"",
+									"\t});",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/csrf-cookie",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"csrf-cookie"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Parse the JSON response body",
+									"var response = pm.response.json();",
+									"",
+									"pm.collectionVariables.set(\"jwt\", response.data.token);",
+									"",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"user@user.com\",\n\t\"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"user@user.com\",\n\t\"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/logout",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"user1\",\n\t\"email\": \"user1@user.com\",\n\t\"password\": \"Password1\",\n\t\"confirm_password\": \"Password1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "me",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{jwt}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/me",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "index",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{csrfToken}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/users",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "filter[name]",
+									"value": "user1",
+									"disabled": true
+								},
+								{
+									"key": "page_size",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{jwt}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "products",
+			"item": [
+				{
+					"name": "index",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{csrfToken}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/products",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"products"
+							],
+							"query": [
+								{
+									"key": "filter[name]",
+									"value": "ba",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "12",
+									"disabled": true
+								},
+								{
+									"key": "page_size",
+									"value": "200",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "view",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{csrfToken}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/products/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"products",
+								"1"
+							],
+							"query": [
+								{
+									"key": "filter[name]",
+									"value": "ba",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "12",
+									"disabled": true
+								},
+								{
+									"key": "page_size",
+									"value": "200",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{jwt}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "roles",
+			"item": [
+				{
+					"name": "index",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{csrfToken}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/roles",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"roles"
+							],
+							"query": [
+								{
+									"key": "filter[name]",
+									"value": "ba",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "12",
+									"disabled": true
+								},
+								{
+									"key": "page_size",
+									"value": "200",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "view",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{csrfToken}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/roles/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"roles",
+								"1"
+							],
+							"query": [
+								{
+									"key": "filter[name]",
+									"value": "ba",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "12",
+									"disabled": true
+								},
+								{
+									"key": "page_size",
+									"value": "200",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{jwt}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer"
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"// Define the base URL (stored as a collection variable)",
+					"const baseUrl = pm.collectionVariables.get('baseUrl');",
+					"",
+					"// Get the cookies using pm.cookies.jar()",
+					"const jar = pm.cookies.jar();",
+					"",
+					"// Fetch the cookie from the server",
+					"jar.get(baseUrl, \"XSRF-TOKEN\", (err, cookie) => {",
+					"    if (err) {",
+					"        console.error(\"Error fetching the cookie:\", err);",
+					"    } else {",
+					"        if (cookie) {",
+					"            // Set the cookie as a collection variable",
+					"            pm.collectionVariables.set('csrfToken', cookie);",
+					"            console.log('CSRF token saved:', cookie);",
+					"",
+					"            // Add the token to the request headers",
+					"            pm.request.addHeader({",
+					"                key: \"X-XSRF-TOKEN\",",
+					"                value: cookie",
+					"            });",
+					"        } else {",
+					"            console.warn('No CSRF token found.');",
+					"        }",
+					"    }",
+					"});",
+					"",
+					"// Add Referer header if needed",
+					"pm.request.addHeader({",
+					"    key: \"Referer\",",
+					"    value: baseUrl",
+					"});",
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "tokenCSRF",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "baseUrl",
+			"value": "https://laravel-api.test",
+			"type": "string"
+		},
+		{
+			"key": "csrfToken",
+			"value": ""
+		},
+		{
+			"key": "jwt",
+			"value": ""
+		}
+	]
+}
