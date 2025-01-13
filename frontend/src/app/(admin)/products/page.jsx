@@ -18,7 +18,6 @@ const Page = () => {
   const RESOURCE = "products";
 
   const [modal, setModal] = useState(false);
-  const [modalGenerate, setModalGenerate] = useState(false);
   const [selected, setSelected] = useState([]);
   const { mutate, isPending: isDeletePending } = useDeleteOne();
 
@@ -116,7 +115,7 @@ const Page = () => {
         render: ({woocommerce_id}) => <a href={`https://wp-magica.test/wp-admin/post.php?post=${woocommerce_id}&action=edit`} target="_blank">{woocommerce_id}</a>,
     },
     {
-        title: "Creato il",
+        title: "Created at",
         key: "created_at",
         type: "datetime",
         align: "right",
@@ -147,31 +146,6 @@ const Page = () => {
     },
 ];
 
-  const tableActions = [
-    {
-      key: 1,
-      onClick: () => toggleModal(selected),
-      icon: <IconPencilMinus size={20} />,
-      label: "Edit",
-    },
-    {
-      type: "divider",
-    },
-    {
-      key: 3,
-      danger: true,
-      onClick: () => {
-        if (selected) {
-          mutate({
-            resource: RESOURCE,
-            id: selected?.id,
-          });
-        }
-      },
-      icon: <IconTrash size={20} />,
-      label: "Delete",
-    },
-  ];
 
   return (
     <>
@@ -190,7 +164,7 @@ const Page = () => {
             <Button
               type="primary"
               key={1}
-              onClick={() => setModalGenerate(!modalGenerate)}
+              onClick={() => setModal(!modal)}
               icon={<IconPlus />}
             >
               Create

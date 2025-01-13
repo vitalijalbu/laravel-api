@@ -12,6 +12,7 @@ import {
 } from "@tabler/icons-react";
 
 const Page = () => {
+    
     const settingLinks = [
         {
             title: "Utenti e ruoli",
@@ -23,7 +24,7 @@ const Page = () => {
                     url: "/settings/users",
                 },
                 {
-                    label: "Ruoli",
+                    label: "Roles",
                     description: "Gestisci ruoli e permessi",
                     icon: <IconLockAccess />,
                     url: "/settings/roles",

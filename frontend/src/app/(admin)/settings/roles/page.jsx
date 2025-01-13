@@ -1,120 +1,133 @@
-'use client';
-import React, { useState, useEffect } from "react";
-import { Avatar, Button, Divider, Dropdown, Space } from "antd";
-import { Link } from "next/link";
-
+"use client";
+import { useState } from "react";
+import { Avatar, Button, Dropdown, Space, Tag } from "antd";
+import Link from "next/link";
 import {
     IconDots,
-    IconTrash,
+    IconEye,
     IconPencilMinus,
     IconPlus,
-    IconLockAccess,
+    IconTrash,
 } from "@tabler/icons-react";
-import Datatable from "@/shared/datatable/";
 import AppLayout from "@/layouts/app-layout";
-import { filter } from "lodash";
+import Datatable from "@/shared/datatable";
 import { formatDate } from "@/hooks/date-formatter";
+import { DrawerUser } from "@/modules/admin";
+import { useDeleteOne } from "@/lib/query";
 
-const PageRoles = () => {
+const Page = () => {
+    const RESOURCE = "roles";
 
+    const [modal, setModal] = useState(false);
+    const [selected, setSelected] = useState([]);
+    const { mutate, isPending: isDeletePending } = useDeleteOne();
 
+    const toggleModal = (record = null) => {
+        setSelected(record);
+        setModal((prev) => !prev);
+    };
 
     const columns = [
         {
-            title: "Nome",
+            title: "Name",
             key: "name",
             filterable: true,
+            fixed: true,
             render: (record) => (
                 <Link href={`/settings/roles/${record?.id}`}>
                     <Space>
-                        <Avatar shape="square" icon={<IconLockAccess />} />
-                        <span>{record?.name}</span>
+                        <Avatar
+                            size="large"
+                            shape="square"
+                            src={record?.image || "/images/placeholder.svg"}
+                        />
+                        {record?.name}
                     </Space>
                 </Link>
             ),
         },
         {
-            title: "Descrizione",
-            type: "text",
+            title: "Tot. uses",
             filterable: true,
-            key: "total_events",
+            fixed: true,
+            key: "tot_users",
+            dataIndex: "tot_users",
         },
         {
-            title: "Creato il",
+            title: "Created at",
             key: "created_at",
-            filterable: true,
             type: "datetime",
             align: "right",
-            render: (record) => (
-                <span>{formatDate(record?.created_at)}</span>
-            ),
+            width: 100,
+            sorter: (a, b) => a.created_at - b.created_at,
+            render: (record) => <span>{formatDate(record?.created_at)}</span>,
         },
         {
             key: "actions",
-            sorter: false,
             align: "right",
             fixed: "right",
-            render: (record) => (
+            render: (record) => {
                 <Dropdown
                     menu={{ items: tableActions }}
                     placement="bottomRight"
                     trigger={["click"]}
                     onClick={() => setSelected(record)}
                 >
-                    <Button type="text" icon={<IconDots color="#222222" />} />
-                </Dropdown>
-            ),
+                    <Button type="text" icon={<IconDots />} />
+                </Dropdown>;
+            },
         },
     ];
 
     const tableActions = [
         {
             key: 1,
-            icon: <IconPencilMinus />,
+            onClick: () => toggleModal(selected),
+            icon: <IconPencilMinus size={20} />,
             label: "Edit",
-            onClick: () => router.visit(`/settings/roles/${selected?.id}`),
         },
         {
             type: "divider",
         },
         {
-            key: 2,
+            key: 3,
             danger: true,
-            icon: <IconTrash />,
+            onClick: () => {
+                if (selected) {
+                    mutate({
+                        resource: RESOURCE,
+                        id: selected?.id,
+                    });
+                }
+            },
+            icon: <IconTrash size={20} />,
             label: "Delete",
-            // onClick: async () => {
-            //     if (selected) {
-            //         handleDelete(selected?.user_id);
-            //     } else {
-            //         console.error("documentId is undefined");
-            //     }
-            // },
         },
     ];
 
     return (
-        <AppLayout
-            title={`Ruoli utenti (${meta?.total})`}
-            backLink="/settings"
-            extra={
-                <Link href="/settings/roles/create">
-                    <Button type="primary" icon={<IconPlus />}>
-                        Aggiungi
-                    </Button>
-                </Link>
-            }
-        >
-            <div className="data-content">
+            <AppLayout
+                title="Roles"
+                extra={[
+                    <Space>
+                        <Button
+                            type="primary"
+                            key={1}
+                            onClick={() => setModal(!modal)}
+                            icon={<IconPlus />}
+                        >
+                            Create
+                        </Button>
+                    </Space>,
+                ]}
+            >
                 <Datatable
+                    resource={RESOURCE}
                     columns={columns}
-                    data={data}
-                    meta={meta}
-                    processing={processing}
-                    initialFilters={filters}
+                    hasExport={true}
                 />
-            </div>
-        </AppLayout>
+            </AppLayout>
     );
 };
 
-export default PageRoles;
+export default Page;

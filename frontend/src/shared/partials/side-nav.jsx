@@ -23,17 +23,17 @@ const SideNav = () => {
   const items = [
     {
       key: "/admin",
-      icon: <IconHome size={22} color="#555" />,
+      icon: <IconHome size={22} />,
       label: <Link href="/">Home</Link>,
     },
     {
       key: "/users",
-      icon: <IconUsers size={22} color="#555" />,
+      icon: <IconUsers size={22} />,
       label: <Link href="/users">Users</Link>,
     },    
     {
       key: "/products",
-      icon: <IconPackage size={22} color="#555" />,
+      icon: <IconPackage size={22} />,
       label: <Link href="/products">Products</Link>,
     },
     {
@@ -41,7 +41,7 @@ const SideNav = () => {
     },
     {
       key: "settings",
-      icon: <IconSettings size={20} color="#555" />,
+      icon: <IconSettings size={20} />,
       label: <Link href="/settings">Settings</Link>,
     },
   ];

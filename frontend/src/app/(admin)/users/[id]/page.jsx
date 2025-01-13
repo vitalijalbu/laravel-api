@@ -133,7 +133,7 @@ export default function Page() {
               placement="bottomRight"
               trigger={["click"]}
             >
-              <Button icon={<IconDots color="#555" />}>Altro</Button>
+              <Button icon={<IconDots />}>Altro</Button>
             </Dropdown>
           </Space>
         }

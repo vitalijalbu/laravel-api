@@ -89,7 +89,7 @@ function Datatable({
         rowKey="id"
         pagination={{
           position: ["bottomRight"], hideOnSinglePage: true, current: pagination.current, pageSize: pagination.pageSize, total: pagination.total,
-          nextIcon: <Button type="text" icon={<IconChevronRight color="#555" />} />, prevIcon: <Button type="text" icon={<IconChevronLeft color="#555" />} />,
+          nextIcon: <Button type="text" icon={<IconChevronRight />} />, prevIcon: <Button type="text" icon={<IconChevronLeft />} />,
           onChange: handlePaginationChange,
         }}
       />
