@@ -20,7 +20,7 @@ class RoleController extends Controller
     {
 
         $filters = $request->query();
-        $data = QueryBuilder::for(Role::class)
+        $data = QueryBuilder::for(Role::with('permissions'))
             ->allowedFilters(['name'])
             ->paginate($filters['label_size'] ?? 25)
             ->appends(request()->query());
@@ -34,11 +34,12 @@ class RoleController extends Controller
     {
         $store = Role::create([
             'name' => $request->name,
+            'guard_name' => $request->label,
+            'permissions' => $request->permissions,
         ]);
 
 
-        return redirect()->route('')->with('success', '
-                Role created successfully');
+        return response()->json($store, 201);
     }
 
 }
