@@ -15,6 +15,7 @@
         "laravel/tinker": "^2.9",
         "spatie/laravel-permission": "^6.10",
         "spatie/laravel-query-builder": "^6.3",
+        "spatie/simple-excel": "^3.7",
         "zircote/swagger-php": "^5.0"
     },
     "require-dev": {
