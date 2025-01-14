@@ -3,7 +3,7 @@
 namespace App\Models\Traits;
 
 use Illuminate\Database\Connection;
-use App\Database\Query\CacheableQueryBuilder;
+use App\Helpers\Query\CacheableQueryBuilder;
 
 /**
  * Make a model support general query caching

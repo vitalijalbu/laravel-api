@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Database\Query;
+namespace App\Helpers\Query;
 
 use Illuminate\Cache\TaggableStore;
 use Illuminate\Database\Connection;
