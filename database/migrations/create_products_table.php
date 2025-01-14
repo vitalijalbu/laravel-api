@@ -14,10 +14,10 @@ return new class extends Migration {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('woocommerce_id')->nullable();
-            $table->foreignId('supplier_id')->nullable(false)->constrained('app_suppliers');
+            $table->foreignId('supplier_id')->nullable(false)->constrained('suppliers');
             $table->string('name')->nullable(false);
             $table->boolean('is_variable')->default(false);
-            $table->boolean('parent_id')->nullable(true)->constrained('app_products');
+            $table->boolean('parent_id')->nullable(true)->constrained('products');
             $table->string('model_code')->nullable();
             $table->string('ref')->nullable();
             $table->string('type')->nullable();
@@ -56,7 +56,7 @@ return new class extends Migration {
         //     $table->dropForeign(['product_id']);
         // });
 
-        // Now drop the app_products table
-        Schema::dropIfExists('app_products');
+        // Now drop the products table
+        Schema::dropIfExists('products');
     }
 };
