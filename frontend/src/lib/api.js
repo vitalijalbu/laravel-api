@@ -8,6 +8,8 @@ export const apiClient = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
+  withCredentials: true,
+  withXSRFToken: true
 });
 
 apiClient.interceptors.request.use(
