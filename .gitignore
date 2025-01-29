@@ -23,3 +23,5 @@ yarn-error.log
 .sql
 .next
 /frontend/.next
+/frontend/nuxtjs/node_modules
+/frontend/nextjs/node_modules
