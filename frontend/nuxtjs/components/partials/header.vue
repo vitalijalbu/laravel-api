@@ -10,6 +10,10 @@ const items = ref([
   {
     label: 'Proprietà',
     to: '/properties',
+  }, 
+  {
+    label: 'Accedi',
+    to: '/login',
   },
   {
     label: 'Guide',

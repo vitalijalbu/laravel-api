@@ -1,129 +1,36 @@
-<div align="center">
-    <h1 align="center">Sciencegram</h1>
-</div>
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
-Figma:
-(https://www.figma.com/design/DKMk7Ph5hBdzLbkyTOGE1k/Sciencegram-Webapp?node-id=0-1&node-type=canvas&t=z4WoGjS4300QYCiH-0)
 
-Here are some rules we want you to following:
-
-- Write clean code
-- Have a strong organization of files & folders
-- ✨ Magic ✨
-
-Here’s an improved version of your documentation with a clearer and more professional tone:
-
----
-
-## 📁 Folder Structure
-
-This section outlines the architecture of the project’s folder and file structure
-
-### **Root Structure**
+First, run the development server:
 
 ```bash
-src/
-├── app/                # Contains all application pages
-│   ├── dashboard/
-│   ├── settings/
-│   ├── users/
-│   ├── orders/
-│   └── ...             # Other pages follow the same pattern
-│                       # Folder names use kebab-case (e.g., `dashboard`)
-├── lib/
-│   └── api/            # Contains all API-related files and actions
-├── modules/
-│   ├── dashboard/
-│   ├── settings/
-│   ├── users/
-│   ├── orders/
-│   └── ...             # Reusable components across the app
-│                       # Folder names use kebab-case
-assets/
-├── styles/             # Contains all SCSS style files
-│   ├── components/     # Styles for custom components
-│   │   ├── _sidebar.scss
-│   │   └── _topnav.scss
-│   ├── pages/          # Styles for individual pages
-│   │   ├── _dashboard.scss
-│   │   └── _settings.scss
-│   └── index.scss      # Main SCSS file to import all styles
-├── fonts/              # Optional: Custom fonts or icons (.woff)
-├── images/             # Static images for the application
-public/
-└── logo & favicon.ico  # Contains public assets like the app logo and favicon
-data/
-└── static data files   # Contains static `.json` files, e.g., dropdown options
-                        # Avoids unnecessary API requests for predefined data
-```
-
-### Naming Conventions
-
-- All folder names follow **kebab-case** (lowercase with dashes, e.g., `dashboard`).
-- **Shared components** are grouped by feature in the `shared/` folder.
-- **SCSS styles** are organized into `components/` for reusable styles and `pages/` for page-specific styles.
-
-### Asset Organization
-
-- **Fonts:** This folder is optional and used for custom fonts or icon sets.
-- **Images:** Static images required by the app are stored here.
-- **Public:** Contains assets accessible from the web (e.g., the app logo and favicon).
-
-### Static Data
-
-- **Data Folder:** Use `.json` files for static data (e.g., options for checkboxes) to reduce unnecessary API calls.
-
----
-
-This structure helps ensure consistency and maintainability throughout the project.
-
-## 📦 Installation
-
-Sciencegram ERP requires [Node.js](https://nodejs.org/) v16.8+ to run.
-
-1. Make sure you have git, node, and npm installed.
-2. Clone this repository locally.
-3. Execute `npm i` and then `npm run dev` from the root directory of the repository.
-4. Open `localhost:3000` in your browser.
-
-## 🖌️ Theming
-
-Each customer has his own logo and colors, so we created a file named `theme.js` where you can play & edit all theme variables. \
-Usually `theme.js` will be provided by our team. \
-Read more on theme customization: https://flowbite-react.com/docs/customize/theme \
-
-## 🤖 Running locally
-
-```bash
-npm install
-#
 npm run dev
-#
-localhost:3000
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-## 🚀 Building
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-```bash
-npm run build
-#
-npm run start
-```
+You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
-## 📦 REST API Intergration
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-For rest api integrattion we use Axios (https://axios-http.com/docs/intro) \
-We setuped an istance in axios inside the `/src/lib/api/client.js`, then it can be imported & used it in every file. \
+## Learn More
 
-## 💊 Libraries inside the box
+To learn more about Next.js, take a look at the following resources:
 
-Our dashboard uses the following libraries:
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-| Name            | Link                              | Installed |
-| --------------- | --------------------------------- | --------- |
-| Next JS 14      | https://nextjs.org/docs           | ✅        |
-| Tailwind CSS    | https://tailwindcss.com           | ✅        |
-| Axios           | https://axios-http.com/docs/intro | ✅        |
-| Tanstack Query  | https://tanstack.com/query/latest | ✅        |
-| Date & Time     | https://day.js.org/               | ✅        |
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
