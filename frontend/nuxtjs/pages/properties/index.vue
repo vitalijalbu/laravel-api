@@ -2,7 +2,7 @@
 useHead({
     title: "Ricerca",
 });
-import Filters from '~/components/filters.vue';
+import Filters from '~/shared/components/filters.vue';
 
 
 const { status, data: posts } = useFetch('https://resthotels.it/api/listings?per_page=500', {

@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 defineOptions({
   name: 'Header', 
 });
@@ -14,6 +14,7 @@ const items = ref([
   {
     label: 'Accedi',
     to: '/login',
+    onClick: () => alert('ciao')
   },
   {
     label: 'Guide',

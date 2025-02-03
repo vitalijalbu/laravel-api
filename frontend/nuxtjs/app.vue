@@ -1,5 +1,8 @@
-<script setup lang="ts">
-import Header from './components/partials/header.vue';
+<script setup>
+import Header from './shared/partials/header.vue';
+import Footer from './shared/partials/footer.vue';
+
+
 
 </script>
 
@@ -7,5 +10,6 @@ import Header from './components/partials/header.vue';
   <UApp>
     <Header />
     <NuxtPage />
+    <Footer/>
   </UApp>
 </template>

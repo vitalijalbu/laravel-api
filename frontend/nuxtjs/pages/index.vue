@@ -1,10 +1,7 @@
 <template>
-    <h1>ciao demo qui</h1>
-    <NuxtLink to="/properties">Properties</NuxtLink>
+    <SectionGridItems/>
 </template>
 
 <script setup>
-useHead({
-    title: "Home",
-});
+import SectionGridItems from './shared/sections/grid-items.vue';
 </script>

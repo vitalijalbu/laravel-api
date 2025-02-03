@@ -20,20 +20,27 @@ async function onSubmit(event) {
 </script>
 
 <template>
-    <UContainer>
-<UForm :schema="schema" :state="state" class="space-y-4" @submit="onSubmit">
-    <UFormField label="Email" name="email">
-      <UInput v-model="state.email" />
-    </UFormField>
+  <UContainer>
+    <UModal title="Accedi">
+      <UButton label="Open" color="neutral" variant="subtle" />
 
-    <UFormField label="Password" name="password">
-      <UInput v-model="state.password" type="password" />
-    </UFormField>
+      <template #body>
+        <UForm :schema="schema" :state="state" class="space-y-4 !w-full" @submit="onSubmit">
+          <UFormField label="Email" name="email" class="w-full">
+            <UInput v-model="state.email" />
+          </UFormField>
 
-    <UButton type="submit">
-      Submit
-    </UButton>
-  </UForm>
-</UContainer>
+          <UFormField label="Password" name="password" class="w-full">
+            <UInput v-model="state.password" type="password" />
+          </UFormField>
+
+          <UButton type="submit">
+            Submit
+          </UButton>
+        </UForm>
+      </template>
+    </UModal>
+
+
+  </UContainer>
 </template>
-
