@@ -5,6 +5,8 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 abstract class BaseQuery
 {
+    protected static $model;
+
     public static function apply($query = null)
     {
         $filters = static::$filters ?? [];

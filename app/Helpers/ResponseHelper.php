@@ -21,10 +21,9 @@ class ResponseHelper
             'meta' => [
                 'pagination' => [
                     'total' => $pagination['total'] ?? 0,
-                    'count' => $pagination['count'] ?? 0,
                     'page_size' => $pagination['per_page'] ?? 25,
                     'current_page' => $pagination['current_page'] ?? 1,
-                    'total_pages' => $pagination['total_pages'] ?? 1,
+                    'total_pages' => $pagination['last_page'] ?? 1,
                 ],
             ],
         ];

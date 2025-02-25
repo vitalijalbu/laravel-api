@@ -8,8 +8,8 @@ import Footer from './shared/partials/footer.vue';
 
 <template>
   <UApp>
-    <Header />
+
     <NuxtPage />
-    <Footer/>
+
   </UApp>
 </template>
