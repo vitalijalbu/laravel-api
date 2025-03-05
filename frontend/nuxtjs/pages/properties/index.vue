@@ -30,7 +30,7 @@ const { status, data: posts } = useFetch('https://resthotels.it/api/listings?per
               <template #header>
                 <h2 class="text-lg font-semibold">{{ post.title }}</h2>
               </template>
-              <img :src="post.image" :alt="post.title" class="w-full h-auto object-cover" />
+              <img src="/placeholder.svg" :alt="post.title" class="w-full h-auto object-cover" />
               <template #footer>
                 {{post.content}}
               </template>

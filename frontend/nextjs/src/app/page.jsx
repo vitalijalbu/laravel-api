@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default async function Home() {
 	let data = await fetch(
-		'https://laravel-api.test/api/products?per_page=1000',
+		'https://toovoz.craftus.co/api/collections/items/entries',
 	);
 	let { data: posts } = await data.json();
 

@@ -16,6 +16,7 @@ const { status, data: post } = useFetch(`https://resthotels.it/api/listings/${ro
     Loading ...
   </div>
     <NuxtLink to="/properties">Indietro</NuxtLink>
+    <UButton>Button</UButton>
     <h1>stai vedendo la proprietà {{ $route.params.slug }}</h1>
     <div class="grid grid-cols-2 gap-4">
     <UCard>
@@ -27,9 +28,6 @@ const { status, data: post } = useFetch(`https://resthotels.it/api/listings/${ro
         <Placeholder class="h-8" />
       </template>
     </UCard>    
-    <UCard>
-      <UCalendar  />
-    </UCard>
   </div>
   </UContainer>
 </template>

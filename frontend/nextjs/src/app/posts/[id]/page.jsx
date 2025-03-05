@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation'
 
 async function getPost(id) {
     try {
-      const res = await fetch(`https://laravel-api.test/api/products/${id}`)
+      const res = await fetch(`https://toovoz.craftus.co/api/collections/items/entries/${id}`)
       
       if (!res.ok) {
         return null
@@ -18,6 +18,13 @@ async function getPost(id) {
     }
   }
   
+  export async function generateStaticParams() {
+    const posts = await fetch('https://toovoz.craftus.co/api/collections/items/entries').then((res) => res.json())
+   
+    return posts?.data.map((post) => ({
+      id: post.id,
+    }))
+  }
 
 
   
@@ -33,9 +40,9 @@ export default async function Page({ params }) {
     <Container>
         <Button variant="outline" size="sm" asChild>
             <Link href="/">Back</Link></Button>
-      <h1>{post?.name}</h1>
-      <p>{post?.pricing}</p>
-      <p>{post?.supplier?.name}</p>
+      <h1>{post?.data.title}</h1>
+      <p>{post?.data.content}</p>
+      <p>{post?.data.pricing}</p>
     </Container>
   )
 }
